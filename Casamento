@@ -1,0 +1,76 @@
+import tkinter as tk
+from datetime import datetime
+
+def confirm_form():
+    form_data = f"💒 FORMULÁRIO DE CASAMENTO 💒\n\n"
+    form_data += f"🔹 Nome do Advogado(a) responsável: {advogado_entry.get()}\n"
+    form_data += f"🔹 RG do Advogado(a) responsável: {rg_advogado_entry.get()}\n"
+    form_data += f"🔹 Nome do Noivo: {nome_noivo_entry.get()}\n"
+    form_data += f"🔹 CPF do Noivo: {cpf_noivo_entry.get()}\n"
+    form_data += f"🔹 Nome da Noiva: {nome_noiva_entry.get()}\n"
+    form_data += f"🔹 CPF da Noiva: {cpf_noiva_entry.get()}\n"
+    form_data += f"🔹 Data do casamento: {calendario_entry.get()}\n"
+    form_data += f"🔹 Regime de Bens do Casamento: {regime_var.get()}\n"
+    form_data += f"🔹 Nomes que cada um dos cônjuges passa a utilizar:\n"
+    form_data += f"    - Noivo: {nome_noivo_entry2.get()}\n"
+    form_data += f"    - Noiva: {nome_noiva_entry2.get()}\n"
+    form_data += f"🔹 Observações/Averbações: {observacoes_entry.get('1.0', 'end')}\n\n"
+    form_data += f"Data e hora do preenchimento: {datetime.now().strftime('%d/%m/%Y %H:%M')}\n\n"
+    form_data += "━━━━━━━━━━━━━━━━━━✧ • ✧━━━━━━━━━━━━━━━\n"
+    form_data += "⚖️ SEM MAIS PARA O MOMENTO, A PARTIR DESTA DATA DECLARO ASSIM CASADOS EM MATRIMÔNIO OS CIDADÃOS SUPRAMENCIONADOS.⚖️\n"
+    form_data += "━━━━━━━━━━━━━━━━━━━━━✧ • ✧━━━━━━━━━━━━"
+    
+    form_output.delete('1.0', tk.END)
+    form_output.insert(tk.END, form_data)
+
+root = tk.Tk()
+root.title("Formulário de Casamento")
+
+# Labels
+tk.Label(root, text="Nome do Advogado(a) responsável:").grid(row=0, column=0, sticky='w')
+tk.Label(root, text="RG do Advogado(a) responsável:").grid(row=1, column=0, sticky='w')
+tk.Label(root, text="Nome do Noivo:").grid(row=2, column=0, sticky='w')
+tk.Label(root, text="CPF do Noivo:").grid(row=3, column=0, sticky='w')
+tk.Label(root, text="Nome da Noiva:").grid(row=4, column=0, sticky='w')
+tk.Label(root, text="CPF da Noiva:").grid(row=5, column=0, sticky='w')
+tk.Label(root, text="Data do casamento (DD/MM/AAAA):").grid(row=6, column=0, sticky='w')
+tk.Label(root, text="Regime de Bens do Casamento:").grid(row=7, column=0, sticky='w')
+tk.Label(root, text="Nomes que cada um dos cônjuges passa a utilizar:").grid(row=8, column=0, sticky='w')
+tk.Label(root, text="Nome do Noivo:").grid(row=9, column=0, sticky='w')
+tk.Label(root, text="Nome da Noiva:").grid(row=10, column=0, sticky='w')
+tk.Label(root, text="Observações/Averbações:").grid(row=11, column=0, sticky='w')
+
+# Entries
+advogado_entry = tk.Entry(root)
+advogado_entry.grid(row=0, column=1)
+rg_advogado_entry = tk.Entry(root)
+rg_advogado_entry.grid(row=1, column=1)
+nome_noivo_entry = tk.Entry(root)
+nome_noivo_entry.grid(row=2, column=1)
+cpf_noivo_entry = tk.Entry(root)
+cpf_noivo_entry.grid(row=3, column=1)
+nome_noiva_entry = tk.Entry(root)
+nome_noiva_entry.grid(row=4, column=1)
+cpf_noiva_entry = tk.Entry(root)
+cpf_noiva_entry.grid(row=5, column=1)
+calendario_entry = tk.Entry(root)
+calendario_entry.grid(row=6, column=1)
+regime_var = tk.StringVar(root)
+regime_var.set("Selecione...")
+regime_dropdown = tk.OptionMenu(root, regime_var, "COMUNHÃO TOTAL DE BENS", "COMUNHÃO PARCIAL DE BENS", "SEPARAÇÃO TOTAL DE BENS")
+regime_dropdown.grid(row=7, column=1)
+nome_noivo_entry2 = tk.Entry(root)
+nome_noivo_entry2.grid(row=9, column=1)
+nome_noiva_entry2 = tk.Entry(root)
+nome_noiva_entry2.grid(row=10, column=1)
+observacoes_entry = tk.Text(root, height=5, width=30)
+observacoes_entry.grid(row=11, column=1)
+
+# Button
+tk.Button(root, text="Confirmar", command=confirm_form).grid(row=12, column=0, columnspan=2)
+
+# Output
+form_output = tk.Text(root, height=20, width=60)
+form_output.grid(row=13, column=0, columnspan=2)
+
+root.mainloop()
